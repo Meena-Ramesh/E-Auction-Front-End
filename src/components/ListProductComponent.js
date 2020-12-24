@@ -22,9 +22,9 @@ class ListProductComponent extends Component {
             <div>
                 <div>
                  <h2 className="text-center">Products List</h2>
-                 <div className = "row">
+                 {/* <div className = "row">
                     <button className="btn btn-primary" onClick={this.addProduct}> Add Product</button>
-                 </div>
+                 </div> */}
                  <br></br>
                  <div className = "row">
                         <table className = "table table-striped table-bordered">
@@ -35,7 +35,7 @@ class ListProductComponent extends Component {
                                     <th> Product Name</th>
                                     <th> Product Category</th>
                                     <th> Product Description</th>
-                                    <th> Actions</th>
+                                    {/* <th> Actions</th> */}
                                 </tr>
                             </thead>
                             <tbody>
