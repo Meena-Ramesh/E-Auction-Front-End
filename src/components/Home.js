@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import HeaderComponent from './HeaderComponent';
+import Header from './Header';
 
 
 class Home extends Component {
@@ -11,6 +11,7 @@ class Home extends Component {
             password: '',
             userType: ''
         }
+        this.registerUser = this.registerUser.bind(this)
     }
 
     changeHandler = (event) => {
@@ -19,44 +20,42 @@ class Home extends Component {
         })
     }
 
-    clickHandler = (event) => {
-        const { history } = this.props
-        console.log(this.state)
+    loginUser = (event) => {
         event.preventDefault()
         axios.post('http://localhost:8080/eas/user/login', this.state)
             .then(
                 response => {
-                    console.log(response)
-                    if(this.state.userType === "BUYER")
-                        history.push({
-                            pathname: '/buyer',
-                            state: {
-                                userId : this.state.userId
-                            }
-                        })
-                    if(this.state.userType === "SELLER")
-                        history.push('/seller')
+                    this.props.history.push({
+                        pathname: '/user',
+                        state: {
+                            userId: this.state.userId
+                        }
+                    })
+
                 }
-                )
+            )
             .catch(error => {
-                history.push({
-                    pathname: '/error',
-                    state : {
-                        code : error.response.status,
-                        detail : error.response.data
-                    }
-                })
-                console.log(error.response.data)
+                console.log(error.response)
+                window.alert(error.response.status +  " " + error.response.data.errorMessage)
             })
-           
+
+    }
+
+    registerUser() {
+       this.props.history.push({
+           pathname: '/register'
+       })
     }
 
     render() {
         const { userId, password } = this.state
         return (
-            <div className="container-fluid"> 
-                <HeaderComponent /> <br /><br /><br />
-                <h2>Welcome!!</h2> <br /><br />
+            <div className="container-fluid">
+                <Header /> <br /><br /><br />
+                <div className="jumbotron text-center" style={{ marginBottom: 0 }}>
+                    <h1>Welcome!!</h1>
+                    <p>Please login to continue</p>
+                </div>
                 <div className="jumbotron">
                     <form>
                         <div className="form-group">
@@ -86,13 +85,14 @@ class Home extends Component {
                                 ADMIN
                             </label>
                         </div>
-                        <button className="btn btn-primary" type="submit" onClick={this.clickHandler}> LOGIN</button>
+                        <button className="btn btn-primary" type="submit" onClick={this.loginUser}> LOGIN</button>
+                        <button style={{ marginLeft: "10px" }} onClick={() => this.registerUser()} className="btn btn-info">REGISTER </button>
                     </form>
                 </div>
             </div>
         )
-        
-        }
+
+    }
 }
 
 export default Home
