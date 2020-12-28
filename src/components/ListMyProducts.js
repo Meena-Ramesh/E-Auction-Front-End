@@ -1,3 +1,4 @@
+import { th } from 'date-fns/locale'
 import React, { Component } from 'react'
 import ProductService from '../service/ProductService'
 import Header from './Header'
@@ -12,8 +13,9 @@ class ListMyProducts extends Component {
         }
 
         this.viewProduct = this.viewProduct.bind(this)
+        this.addProduct = this.addProduct.bind(this)
         this.editProduct = this.editProduct.bind(this)
-        this.deleteproduct = this.deleteproduct.bind(this)
+        this.deleteProduct = this.deleteProduct.bind(this)
     }
 
     componentDidMount() {
@@ -37,12 +39,39 @@ class ListMyProducts extends Component {
         })
     }
 
-    editProduct = (productId) => {
-
+    addProduct = () => {
+        this.props.history.push({
+            pathname: '/seller/product/add',
+            state: {
+                userId: this.props.location.state.userId
+            }
+        })
     }
 
-    deleteproduct = (productId) => {
+    editProduct = (product) => {
+        this.props.history.push({
+            pathname: '/seller/product/update',
+            state: {
+                userId: this.props.location.state.userId,
+                productId: product.productId,
+                productName: product.productName,
+                category: product.category,
+                productDescription: product.productDescription
+            }
+        })
+    }
 
+    deleteProduct = (productId) => {
+        ProductService.deleteProduct(productId)
+        .then(() => {
+            window.alert("Product deleted successfully!!")
+            window.location.reload()
+        })
+        .catch(error => {
+            console.log(error.response)
+            window.alert(error.response.data.errorCode +  " " + error.response.data.errorMessage)
+            window.location.reload()
+        })
     }
 
 
@@ -59,7 +88,7 @@ class ListMyProducts extends Component {
                 </h3>
                 <br />
 
-                <button className="btn btn-secondary btn-block" onClick={this.addProduct}> Add Product</button>
+                <button className="btn btn-success btn-block" onClick={() => this.addProduct()}> Add Product</button>
 
                 <div className="row">
                     <SellerSideBar userId={this.props.location.state.userId} />
@@ -74,8 +103,8 @@ class ListMyProducts extends Component {
                                                 <p className="card-text">{product.productDescription}</p>
                                                 <p className="card-text">Category : {product.category}</p>
                                                 <p className="card-text">Review : {product.reviewStatus}</p>
-                                                <button onClick={() => this.editproduct(product.product.id)} className="btn btn-info">Update </button>
-                                                <button style={{ marginLeft: "10px" }} onClick={() => this.deleteproduct(product.product.id)} className="btn btn-danger">Delete </button>
+                                                <button onClick={() => this.editProduct(product)} className="btn btn-info">Update </button>
+                                                <button style={{ marginLeft: "10px" }} onClick={() => this.deleteProduct(product.productId)} className="btn btn-danger">Delete </button>
                                                 <button style={{ marginLeft: "10px" }} onClick={() => this.viewProduct(product.productId)} className="btn btn-info">View </button>
                                             </div>
                                         </div>

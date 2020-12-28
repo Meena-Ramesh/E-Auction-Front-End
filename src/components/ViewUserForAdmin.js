@@ -56,7 +56,14 @@ class ViewUserForAdmin extends Component {
                              Country         : {user.address.country} <br />
                              ZIP             : {user.address.zip} <br />
                             </pre>
-
+                            <h6>Bank Details</h6>
+                            <hr />
+                            <pre>
+                            Account Number      : {user.bankDetails.accountNumber} <br/>
+                            Account Holder Name : {user.bankDetails.accountHolderName} <br/>
+                            Bank Name           : {user.bankDetails.bankName} <br/>
+                            Branch Name         : {user.bankDetails.branchName} <br/>
+                            </pre>
                         </div>
                     </div>
                 </div>

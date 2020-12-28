@@ -19,6 +19,10 @@ import ListBidsForBuyer from './components/ListBidsForBuyer';
 import ListAllCategory from './components/ListAllCategory';
 import ListProductByCategory from './components/ListProductByCategory';
 import InitiateAuction from './components/InitiateAuction';
+import ListBidsForSeller from './components/ListBidsForSeller';
+import ViewBuyerForSeller from './components/ViewBuyerForSeller';
+import AddProduct from './components/AddProduct';
+import UpdateProduct from './components/UpdateProduct';
 
 
 
@@ -31,7 +35,11 @@ function App() {
         <Route exact path="/register" component={RegisterUser}/>
         <Route exact path="/error" component={ErrorPage} />
         <Route exact path="/seller/view/product" component={ViewProductForSeller}/>
+        <Route exact path="/seller/product/add" component={AddProduct}/>
+        <Route exact path="/seller/product/update" component={UpdateProduct}/>
         <Route exact path="/seller/view/product/initiateauction" component={InitiateAuction}/>
+        <Route exact path="/seller/view/product/bids" component={ListBidsForSeller}/>
+        <Route exact path="/seller/view/product/bids/buyer" component={ViewBuyerForSeller}/>
         <Route exact path="/view/auction/all" component={ListAllAuction}/>
         <Route exact path="/allproducts" component={ListAllProductForSeller} />
         <Route exact path="/myproducts" component={ListMyProducts} />

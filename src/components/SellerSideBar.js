@@ -17,8 +17,6 @@ function SellerSideBar(props) {
                             }
 
                         }}> View All Products</Link></a>
-
-                        <a><Link to= "/">Intiate Auction</Link> </a>
                         
                         <a><Link to={{
                             pathname: "/view/auction/all",

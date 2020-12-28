@@ -21,6 +21,13 @@ function BuyerSideBar(props) {
                 Categories</Link></a>
 
             <a><Link to={{
+                pathname: "/myprofile",
+                state: {
+                    userId: props.userId
+                }
+            }}>View Profile</Link> </a>
+
+            <a><Link to={{
                 pathname: '/'
             }}>
                 Logout</Link></a>

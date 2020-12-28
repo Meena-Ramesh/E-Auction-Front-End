@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import Header from './Header';
+import UserService from '../service/UserService';
 
 
 class Home extends Component {
@@ -22,7 +22,7 @@ class Home extends Component {
 
     loginUser = (event) => {
         event.preventDefault()
-        axios.post('http://localhost:8080/eas/user/login', this.state)
+        UserService.loginUser(this.state)
             .then(
                 response => {
                     this.props.history.push({
@@ -35,8 +35,7 @@ class Home extends Component {
                 }
             )
             .catch(error => {
-                console.log(error.response)
-                window.alert(error.response.status +  " " + error.response.data.errorMessage)
+                window.alert(error.response.data.errorCode +  " " + error.response.data.errorMessage)
             })
 
     }
@@ -57,10 +56,12 @@ class Home extends Component {
                     <p>Please login to continue</p>
                 </div>
                 <div className="jumbotron">
-                    <form>
+                    <form className="was-validated">
                         <div className="form-group">
                             <label>UserId</label>
                             <input type="text" className="form-control" name="userId" value={userId} pattern="[0-9]{1,}" onChange={this.changeHandler} required />
+                            <div className="valid-feedback">Valid</div>
+                            <div className="invalid-feedback">Please fill out this field using numbers only.</div>
                         </div>
                         <div className="form-group">
                             <label>Password</label>

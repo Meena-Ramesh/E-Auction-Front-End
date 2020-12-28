@@ -10,6 +10,8 @@ class ListAllUserForAdmin extends Component {
         this.state = {
             users: []
         }
+
+        this.viewUser = this.viewUser.bind(this)
     }
 
     componentDidMount() {
@@ -65,7 +67,7 @@ class ListAllUserForAdmin extends Component {
                                             <td>  {user.lastName}</td>
                                             <td>  {user.userType} </td>
                                             <td>
-                                                <button style={{ marginLeft: "10px" }} onClick={this.viewUser(user.userId)} className="btn btn-info">View</button>
+                                                <button style={{ marginLeft: "10px" }} onClick={() => this.viewUser(user.userId)} className="btn btn-info">View</button>
                                             </td>
                                         </tr>
                                 )

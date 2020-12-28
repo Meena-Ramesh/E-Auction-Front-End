@@ -12,6 +12,7 @@ class ViewProductForSeller extends Component {
         }
 
         this.initiateAuction = this.initiateAuction.bind(this)
+        this.viewBids = this.viewBids.bind(this)
     }
 
     componentDidMount() {
@@ -31,6 +32,16 @@ class ViewProductForSeller extends Component {
             pathname: '/seller/view/product/initiateauction',
             state: {
             productId: productId,
+            userId: this.props.location.state.userId
+            }
+        })
+    }
+
+    viewBids = (auctionId) => {
+        this.props.history.push({
+            pathname: '/seller/view/product/bids',
+            state: {
+            auctionId: auctionId,
             userId: this.props.location.state.userId
             }
         })
@@ -73,7 +84,7 @@ class ViewProductForSeller extends Component {
                                  Start Date             : {auction.startDate.slice(0,10)}<br/>
                                  End Date               : {auction.endDate.slice(0,10)}
                             </pre>
-                            <button className= "btn btn-info">View Bids</button>
+                            <button className= "btn btn-info" onClick={() => this.viewBids(auction.auctionId)}>View Bids</button>
                             </React.Fragment> :
                             <button className= "btn btn-success" onClick={() => this.initiateAuction(product.productId)}>Initiate auction</button>)    
                             

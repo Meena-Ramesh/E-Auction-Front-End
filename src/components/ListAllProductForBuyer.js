@@ -57,6 +57,10 @@ class ListAllProductForBuyer extends Component {
                                                 <h4 class="card-title">{product.productName}</h4>
                                                 <p className="card-text">{product.productDescription}</p>
                                                 <p className="card-text">Category : {product.category}</p>
+                                                {
+                                                    product.auction ? <p><strong>AUCTIONID -</strong> {product.auction.auctionId} </p>
+                                                    : <p>NOT IN AUCTION YET</p>
+                                                }
                                                 <button style={{ marginLeft: "10px" }} onClick={() => this.viewProduct(product.productId)} className="btn btn-info">View </button>
                                             </div>
                                         </div>

@@ -30,14 +30,9 @@ class InitiateAuction extends Component {
         .then(response => {
             console.log(response)
             window.alert("Auction initiated successfully! The auction Id is : " + response.data.auctionId);
-            this.props.history.push({
-                pathname: '/seller/view/product',
-                state: {
-                    userId: userId,
-                    productId: productId
-                }
+            this.props.history.go(-2);
             })
-        }).catch(error => {
+        .catch(error => {
             window.alert(error.response.data.errorCode +  " " + error.response.data.errorMessage)
             window.location.reload()
         })  

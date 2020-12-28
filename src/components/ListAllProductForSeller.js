@@ -44,10 +44,16 @@ class ListAllProductForSeller extends Component {
                                 product => {
                                     return (
                                         <div className="card bg-light">
+                                            <img className="card-img-top" src={'eauction-system\public\productImages\candles.jpg'} alt="Card image"></img>
                                             <div className="card-body text-center">
                                                 <h4 class="card-title">{product.productName}</h4>
                                                 <p className="card-text">{product.productDescription}</p>
                                                 <p className="card-text">Category : {product.category}</p>
+                                                <p className="card-text">Seller ID: {product.seller.userId} </p>
+                                                {
+                                                    product.auction ? <p><strong>AUCTIONID -</strong> {product.auction.auctionId}  </p>
+                                                    : <p>NOT IN AUCTION YET</p>
+                                                }
                                             </div>
                                         </div>
                                     )

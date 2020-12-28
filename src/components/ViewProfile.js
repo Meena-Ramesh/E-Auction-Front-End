@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import UserService from '../service/UserService';
 import AdminSideBar from './AdminSideBar';
+import BuyerSideBar from './BuyerSideBar';
 import Header from './Header';
 import SellerSideBar from './SellerSideBar';
 
@@ -41,6 +42,9 @@ class ViewProfile extends Component {
                     {
                         this.state.user.userType === 'ADMIN' && <AdminSideBar userId={this.state.user.userId} />
                     }
+                    {
+                        this.state.user.userType === 'BUYER' && <BuyerSideBar userId={this.state.user.userId} />
+                    }
                     <div className="card col-8" style={{ padding: 30 }}>
                         <h5 class="card-title">Hello, {user.firstName} </h5>
                         <div className="card-body">
@@ -63,7 +67,14 @@ class ViewProfile extends Component {
                              Country         : {user.address.country} <br />
                              ZIP             : {user.address.zip} <br />
                             </pre>
-
+                            <h6>Bank Details</h6>
+                            <hr />
+                            <pre>
+                            Account Number      : {user.bankDetails.accountNumber} <br/>
+                            Account Holder Name : {user.bankDetails.accountHolderName} <br/>
+                            Bank Name           : {user.bankDetails.bankName} <br/>
+                            Branch Name         : {user.bankDetails.branchName} <br/>
+                            </pre>
                         </div>
                     </div>
                 </div>
