@@ -17,13 +17,13 @@ function SellerSideBar(props) {
                             }
 
                         }}> View All Products</Link></a>
-                        
+
                         <a><Link to={{
                             pathname: "/view/auction/all",
                             state: {
                                 userId: props.userId
                             }
-                            
+
                         }}>View Auctions</Link> </a>
                         <a><Link to= {{
                             pathname: "/myprofile",
@@ -38,6 +38,7 @@ function SellerSideBar(props) {
 
         </div>
     )
+    
 }
 
 export default SellerSideBar

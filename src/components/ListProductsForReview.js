@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ProductService from '../service/ProductService'
 import AdminSideBar from './AdminSideBar'
+import Footer from './Footer'
 import Header from './Header'
 
 
@@ -21,7 +22,7 @@ class ListProductsForReview extends Component {
                 )
             })
             .catch(error => {
-                window.alert(error.response.status +  " " + error.response.data.errorMessage)
+                window.alert(error.response.data.errorCode +  " " + error.response.data.errorMessage)
             })
     }
 
@@ -39,7 +40,7 @@ class ListProductsForReview extends Component {
         return (
             <div>
                  <Header />
-                <br />
+                 <br />  <br />  <br /> <br />
 
                 <h3 className="text-center">
                     Product List
@@ -54,6 +55,7 @@ class ListProductsForReview extends Component {
                                 product => {
                                     return (
                                         <div className="card bg-light" key={product.productId}>
+                                            <img className="card-img-top" src={product.productImage} alt="Card image"></img>
                                             <div className="card-body text-center">
                                                 <h4 class="card-title">{product.productName}</h4>
                                                 <p className="card-text">{product.productDescription}</p>
@@ -69,6 +71,7 @@ class ListProductsForReview extends Component {
                     </div>
 
                 </div>
+                <Footer/>
             </div>
         )
     }

@@ -1,6 +1,7 @@
 import { th } from 'date-fns/locale'
 import React, { Component } from 'react'
 import ProductService from '../service/ProductService'
+import Footer from './Footer'
 import Header from './Header'
 import SellerSideBar from './SellerSideBar'
 
@@ -80,9 +81,8 @@ class ListMyProducts extends Component {
         return (
             <div>
                 <Header />
-                <br />
-
-                <h3 className="text-center">
+                <br />  <br />  <br /> <br />
+                <h3 className="text-center sticky-top">
                     Product List
                     <small className="text-muted">  (My Products)</small>
                 </h3>
@@ -98,12 +98,17 @@ class ListMyProducts extends Component {
                                 product => {
                                     return (
                                         <div className="card bg-light">
+                                            <img className="card-img-top" src={product.productImage} alt="Card image"></img>
                                             <div className="card-body text-center">
                                                 <h4 class="card-title">{product.productName}</h4>
                                                 <p className="card-text">{product.productDescription}</p>
                                                 <p className="card-text">Category : {product.category}</p>
                                                 <p className="card-text">Review : {product.reviewStatus}</p>
-                                                <button onClick={() => this.editProduct(product)} className="btn btn-info">Update </button>
+                                                {
+                                                    product.auction ? <p className="card-text"><strong>AUCTIONID -</strong> {product.auction.auctionId} </p>
+                                                    : <p className="card-text">NOT IN AUCTION YET</p>
+                                                }
+                                                <button onClick={() => this.editProduct(product)} className="btn btn-info">Update</button>
                                                 <button style={{ marginLeft: "10px" }} onClick={() => this.deleteProduct(product.productId)} className="btn btn-danger">Delete </button>
                                                 <button style={{ marginLeft: "10px" }} onClick={() => this.viewProduct(product.productId)} className="btn btn-info">View </button>
                                             </div>
@@ -115,6 +120,7 @@ class ListMyProducts extends Component {
 
                 </div>
                 <br />
+                <Footer/>
             </div>
         )
     }

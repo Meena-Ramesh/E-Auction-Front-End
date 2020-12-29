@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ProductService from '../service/ProductService'
+import Footer from './Footer'
 import Header from './Header'
 import SellerSideBar from './SellerSideBar'
 
@@ -19,7 +20,7 @@ class ListAllProductForSeller extends Component {
                 )
             })
             .catch(error => {
-                window.alert(error.response.status + " " + error.response.data)
+                    window.alert(error.response.data.errorCode + " " + error.response.data.errorMessage)
             })
     }
 
@@ -27,15 +28,12 @@ class ListAllProductForSeller extends Component {
         return (
             <div>
                 <Header />
-                <br />
+                <br />  <br />  <br /> <br />
                 <h3 className="text-center">
                     Product List
                     <small className="text-muted">  (All products in the system)</small>
                 </h3>
                 <br />
-                {/* <div className = "row">
-                    <button className="btn btn-primary" onClick={this.addProduct}> Add Product</button>
-                 </div> */}
                 <div className="row">
                     <SellerSideBar userId={this.props.location.state.userId} />
                     <div className="card-columns col-9">
@@ -44,15 +42,15 @@ class ListAllProductForSeller extends Component {
                                 product => {
                                     return (
                                         <div className="card bg-light">
-                                            <img className="card-img-top" src={'eauction-system\public\productImages\candles.jpg'} alt="Card image"></img>
+                                            <img className="card-img-top" src={product.productImage} alt="Card image"></img>
                                             <div className="card-body text-center">
-                                                <h4 class="card-title">{product.productName}</h4>
+                                                <h4 className="card-title">{product.productName}</h4>
                                                 <p className="card-text">{product.productDescription}</p>
                                                 <p className="card-text">Category : {product.category}</p>
                                                 <p className="card-text">Seller ID: {product.seller.userId} </p>
                                                 {
-                                                    product.auction ? <p><strong>AUCTIONID -</strong> {product.auction.auctionId}  </p>
-                                                    : <p>NOT IN AUCTION YET</p>
+                                                    product.auction ? <p className="card-text"><strong>AUCTIONID -</strong> {product.auction.auctionId} </p>
+                                                    : <p className="card-text">NOT IN AUCTION YET</p>
                                                 }
                                             </div>
                                         </div>
@@ -63,6 +61,7 @@ class ListAllProductForSeller extends Component {
 
 
                 </div>
+                <Footer/>
             </div>
         )
     }

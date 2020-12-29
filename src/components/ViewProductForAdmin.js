@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ProductService from '../service/ProductService'
 import AdminSideBar from './AdminSideBar'
+import Footer from './Footer'
 import Header from './Header'
 
 class ViewProductForAdmin extends Component {
@@ -39,7 +40,7 @@ class ViewProductForAdmin extends Component {
                 })
             })
             .catch(error => {
-                window.alert(error.response.status +  " " + error.response.data.errorMessage)
+                window.alert(error.response.data.errorCode +  " " + error.response.data.errorMessage)
             })
     }
     render() {
@@ -52,6 +53,7 @@ class ViewProductForAdmin extends Component {
         return (
             <div>
                 <Header />
+                <br />  <br />  <br /> <br />
                 <div className="row">
                     <AdminSideBar userId={this.props.location.state.userId} />
                     <div className="card-body">
@@ -85,10 +87,10 @@ class ViewProductForAdmin extends Component {
                              ZIP             : {seller.address.zip} <br />
                         </pre>
                         <button onClick={() => this.reviewProduct(product.productId, "approve")} className="btn btn-success">APRROVE</button>
-                        <button onClick={() => this.reviewProduct(product.productId, "reject")} className="btn btn-danger">REJECT</button>
+                        <button onClick={() => this.reviewProduct(product.productId, "reject")} className="btn btn-danger" style={{ marginLeft: "10px" }}>REJECT</button>
                     </div>
                 </div>
-
+                <Footer/>
             </div>
         )
     }

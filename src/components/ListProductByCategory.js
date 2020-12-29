@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ProductService from '../service/ProductService'
 import BuyerSideBar from './BuyerSideBar'
+import Footer from './Footer'
 import Header from './Header'
 
 export class ListProductByCategory extends Component {
@@ -40,7 +41,7 @@ export class ListProductByCategory extends Component {
         return (
             <div>
                  <Header />
-                <br />
+                 <br />  <br />  <br /> <br />
                 <h3 className="text-center">
                     Product List
                     <small className="text-muted">  (All products in the category - {this.props.location.state.category} )</small>
@@ -54,10 +55,15 @@ export class ListProductByCategory extends Component {
                                 product => {
                                     return (
                                         <div className="card bg-light" key={product.productId}>
+                                            <img className="card-img-top" src={product.productImage} alt="Card image"></img>
                                             <div className="card-body text-center">
                                                 <h4 class="card-title">{product.productName}</h4>
                                                 <p className="card-text">{product.productDescription}</p>
                                                 <p className="card-text">Category : {product.category}</p>
+                                                {
+                                                    product.auction ? <p className="card-text"><strong>AUCTIONID -</strong> {product.auction.auctionId} </p>
+                                                    : <p className="card-text">NOT IN AUCTION YET</p>
+                                                }
                                                 <button style={{ marginLeft: "10px" }} onClick={() => this.viewProduct(product.productId)} className="btn btn-info">View </button>
                                             </div>
                                         </div>
@@ -66,7 +72,7 @@ export class ListProductByCategory extends Component {
                         }
                     </div>
                 </div>
-                
+                <Footer/>
                 
             </div>
         )

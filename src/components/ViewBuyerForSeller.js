@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import UserService from '../service/UserService';
+import Footer from './Footer';
 import Header from './Header';
 import SellerSideBar from './SellerSideBar';
 
@@ -32,6 +33,7 @@ class ViewBuyerForSeller extends Component {
         return (
             <div>
                 <Header />
+                <br />  <br />  <br /> <br />
                 <div className="row">
                     <SellerSideBar userId={this.props.location.state.userId}/>
                     <div className="card col-8" style={{ padding: 30 }}>
@@ -59,6 +61,7 @@ class ViewBuyerForSeller extends Component {
                         </div>
                     </div>
                 </div>
+                <Footer/>
             </div>
         )
     }

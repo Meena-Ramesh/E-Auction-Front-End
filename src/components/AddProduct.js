@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ProductService from '../service/ProductService'
+import Footer from './Footer'
 import Header from './Header'
 import SellerSideBar from './SellerSideBar'
 
@@ -9,7 +10,8 @@ class AddProduct extends Component {
         this.state = {
             productName: '',
             category: '',
-            productDescription: ''
+            productDescription: '',
+            productImage: ''
         }
 
         this.addProduct = this.addProduct.bind(this)
@@ -55,6 +57,7 @@ class AddProduct extends Component {
         return (
             <div>
                <Header/>
+               <br />  <br />  <br /> <br />
                <div className="row">
                <SellerSideBar userId={this.props.location.state.userId} />
                <div className="card col-9">
@@ -75,7 +78,12 @@ class AddProduct extends Component {
                                     <div className="form-group">
                                         <label htmlFor="productDescription">Product Description: </label>
                                         <input type="text" name="productDescription" class="form-control"
-                                            placeholder="productDescription " value={this.state.productDescription} onChange={this.changeHandler} required />
+                                            placeholder="Product Description " value={this.state.productDescription} onChange={this.changeHandler} required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="productImage">Product Image URL: </label>
+                                        <input type="text" name="productImage" class="form-control"
+                                            placeholder="Image URL" value={this.state.productImage} onChange={this.changeHandler} required />
                                     </div>
                                     <button className="btn btn-success" onClick={() => this.addProduct()}>Add Product</button>
                                     <button className="btn btn-danger" style={{ marginLeft: "10px" }} onClick={() => this.cancelProcess()}>Cancel</button>
@@ -83,6 +91,7 @@ class AddProduct extends Component {
                             </div>
                         </div>
                 </div>
+                <Footer/>
             </div>
         )
     }

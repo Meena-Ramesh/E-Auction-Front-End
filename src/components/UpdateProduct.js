@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ProductService from '../service/ProductService'
+import Footer from './Footer'
 import Header from './Header'
 import SellerSideBar from './SellerSideBar'
 
@@ -53,6 +54,7 @@ class UpdateProduct extends Component {
         return (
             <div>
                <Header/>
+               <br />  <br />  <br /> <br />
                <div className="row">
                <SellerSideBar userId={this.props.location.state.userId} />
                <div className="card col-9">
@@ -73,14 +75,15 @@ class UpdateProduct extends Component {
                                     <div className="form-group">
                                         <label htmlFor="productDescription">Product Description: </label>
                                         <input type="text" name="productDescription" class="form-control"
-                                            placeholder="productDescription " value={this.state.productDescription} onChange={this.changeHandler} required />
+                                            placeholder="Product Description " value={this.state.productDescription} onChange={this.changeHandler} required />
                                     </div>
-                                    <button className="btn btn-success" onClick={() => this.updateProduct()}>Add Product</button>
+                                    <button className="btn btn-success" onClick={() => this.updateProduct()}>Update Product</button>
                                     <button className="btn btn-danger" style={{ marginLeft: "10px" }} onClick={() => this.cancelProcess()}>Cancel</button>
                                 </form>
                             </div>
                         </div>
                 </div>
+                <Footer/>
             </div>
         )
     }

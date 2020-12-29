@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ProductService from '../service/ProductService'
+import Footer from './Footer'
 import Header from './Header'
 import SellerSideBar from './SellerSideBar'
 
@@ -23,7 +24,7 @@ class ViewProductForSeller extends Component {
             })
         })
         .catch(error => {
-            window.alert(error.response.data)
+            window.alert(error.response.data.errorCode + " " + error.response.data.errorMessage)
         })
     }
 
@@ -58,6 +59,7 @@ class ViewProductForSeller extends Component {
         return (
             <div>
                 <Header/>
+                <br />  <br />  <br /> <br />
                 <div class="row">
                     <SellerSideBar userId= {this.props.location.state.userId}/>
                     <div className="card col-8" style={{padding:30}}>
@@ -93,6 +95,7 @@ class ViewProductForSeller extends Component {
                     </div>
                     </div>
                 </div>
+                <Footer/>
             </div>
         )
     }

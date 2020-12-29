@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import UserService from '../service/UserService';
 import AdminSideBar from './AdminSideBar';
 import BuyerSideBar from './BuyerSideBar';
+import Footer from './Footer';
 import Header from './Header';
 import SellerSideBar from './SellerSideBar';
 
@@ -23,7 +24,7 @@ class ViewProfile extends Component {
                 })
             })
             .catch(error => {
-                window.alert(error.response.status + " " + error.response.data)
+                window.alert(error.response.data.errorCode + " " + error.response.data.errorMessage)
             })
     }
 
@@ -35,6 +36,7 @@ class ViewProfile extends Component {
         return (
             <div>
                 <Header/>
+                <br />  <br />  <br /> <br />
                 <div class="row">
                     {
                         this.state.user.userType === 'SELLER' && <SellerSideBar userId={this.state.user.userId} />
@@ -78,6 +80,7 @@ class ViewProfile extends Component {
                         </div>
                     </div>
                 </div>
+                <Footer/>
             </div>
         )
     }

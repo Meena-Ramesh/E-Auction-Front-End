@@ -5,7 +5,6 @@ import ErrorPage from './components/ErrorPage';
 import ListMyProducts from './components/ListMyProducts';
 import ViewProfile from './components/ViewProfile';
 import ListAllAuction from './components/ListAllAuction';
-import UserHome from './components/UserHome';
 import ListProductsForReview from './components/ListProductsForReview';
 import ViewProductForSeller from './components/ViewProductForSeller';
 import ViewProductForAdmin from './components/ViewProductForAdmin';
@@ -31,7 +30,6 @@ function App() {
     <BrowserRouter>
         <Switch>
         <Route exact path="/" component={Home}/>
-        <Route exact path="/user" component={UserHome}/>
         <Route exact path="/register" component={RegisterUser}/>
         <Route exact path="/error" component={ErrorPage} />
         <Route exact path="/seller/view/product" component={ViewProductForSeller}/>
