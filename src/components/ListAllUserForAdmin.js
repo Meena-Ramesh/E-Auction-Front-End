@@ -214,6 +214,7 @@ class ListAllUserForAdmin extends Component {
                     </div>
                     </div>
                 </div>
+                <br/> <br/>
                 <Footer/>
             </div>
         )

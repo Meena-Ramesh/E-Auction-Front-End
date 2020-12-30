@@ -72,6 +72,7 @@ export class ListProductByCategory extends Component {
                         }
                     </div>
                 </div>
+                <br/> <br/>
                 <Footer/>
                 
             </div>

@@ -31,7 +31,7 @@ class InitiateAuction extends Component {
         .then(response => {
             console.log(response)
             window.alert("Auction initiated successfully! The auction Id is : " + response.data.auctionId);
-            this.props.history.go(-2);
+            window.location.reload()
             })
         .catch(error => {
             window.alert(error.response.data.errorCode +  " " + error.response.data.errorMessage)
@@ -57,10 +57,10 @@ class InitiateAuction extends Component {
                 <div className="card col-9">
                         <h2 className="text-center">Initiate Auction</h2>
                         <div className="card-body">
-                            <form>
+                            <form onSubmit={() => this.createAuction(this.props.location.state.productId)}>
                                 <div className="form-group">
                                     <label htmlFor="basePrice">Base Price:</label>
-                                    <input type="number" min="0" step="1" className="form-control" placeholder="Enter base price"
+                                    <input type="text" pattern="[0-9]{1,}" className="form-control" placeholder="Enter base price"
                                         value={this.state.basePrice} onChange={this.changeHandler} required name="basePrice" />
                                 </div>
                                 <div className="form-group">
@@ -74,13 +74,14 @@ class InitiateAuction extends Component {
                                         value={this.state.endDate} min={this.state.startDate} onChange={this.changeHandler} required name="endDate" />
                                 </div>
                                 <div className="mt-3">
-                                    <button type="submit" class="btn btn-success" onClick={() => this.createAuction(this.props.location.state.productId)}>Submit</button>
+                                    <button type="submit" class="btn btn-success" >Submit</button>
                                     <button className="btn btn-danger" style={{ marginLeft: "10px" }}>Cancel</button>
                                 </div>
                             </form>
                         </div>
                    </div>
                 </div>
+                <br/> <br/>
                 <Footer/>
             </div>
         )

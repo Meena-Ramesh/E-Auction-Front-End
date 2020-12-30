@@ -61,6 +61,7 @@ class ListAllProductForSeller extends Component {
 
 
                 </div>
+                <br/> <br/>
                 <Footer/>
             </div>
         )

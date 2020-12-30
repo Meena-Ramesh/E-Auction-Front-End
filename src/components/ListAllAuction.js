@@ -173,10 +173,10 @@ class ListAllAuction extends Component {
                                         auction =>
                                             <tr key={auction.auctionId}>
                                                 <td>{auction.auctionId}</td>
-                                                <td>{auction.basePrice}</td>
+                                                <td><i className="fa fa-inr"></i> {auction.basePrice}</td>
                                                 <td>{auction.startDate.slice(0,10)}</td>
                                                 <td>{auction.endDate.slice(0,10)}</td>
-                                                <td>{auction.maxBidPrice}</td>
+                                                <td><i className="fa fa-inr"></i> {auction.maxBidPrice}</td>
                                                 <td>{auction.bidWinner}</td>
                                             </tr>
                                     )
@@ -187,6 +187,7 @@ class ListAllAuction extends Component {
                     </div>
                     </div>
                 </div>
+                <br/> <br/>
                 <Footer/>
             </div>
         )

@@ -1,210 +1,3 @@
-/* 
-import React, { Component } from 'react'
-import UserService from '../service/UserService';
-import Header from './Header';
-
-class RegisterUser extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            firstName: '',
-            lastName: '',
-            email: '',
-            aadharNumber: '',
-            contactNumber: '',
-            doorNumber: '',
-            buildingName: '',
-            streetName: '',
-            locality: '',
-            city: '',
-            state: '',
-            country: '',
-            zip: '',
-            accountNumber: '',
-            accountHolderName: '',
-            bankName: '',
-            branchName: '',
-            password: '',
-            userType: '',
-        }
-
-        this.registerUser = this.registerUser.bind(this)
-    }
-
-    changeHandler = (event) => {
-        event.preventDefault();
-        this.setState({
-            [event.target.name]: event.target.value 
-        })
-    }
-
-
-    registerUser = (event) => {
-        let user = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            aadharNumber: this.state.aadharNumber,
-            contactNumber: this.state.contactNumber,
-            password: this.state.password,
-            userType: this.state.userType,
-            address : {
-            doorNumber: this.state.doorNumber,
-            buildingName: this.state.buildingName,
-            streetName: this.state.streetName,
-            locality: this.state.locality,
-            city: this.state.city,
-            state: this.state.state,
-            country: this.state.country,
-            zip: this.state.zip,
-            },
-            bankDetails: {
-            accountNumber: this.state.accountNumber,
-            accountHolderName: this.state.accountHolderName,
-            bankName: this.state.bankName,
-            branchName: this.state.branchName,
-            }
-        }
-        console.log(user.userType)
-        UserService.createAccount(user)
-            .then(response => {
-                console.log(response)
-                window.alert("Account created successfully with UserID " + response.data.userId);
-            })
-            .catch(error => {
-                console.log(error.response)
-                window.alert(error.response.data.errorCode + " " + error.response.data.errorMessage)
-            })
-    }
-
-    goToLogin = () => {
-        this.props.history.push('/');
-    }
-
-    render() {
-        return (
-            <div>
-                <Header/>
-                <br />  <br />  <br /> <br />
-            <div className="container">
-                
-            <div className="row">
-            <h2 className="text-center col-10">User Registration</h2>
-            <button className="btn btn-info col-2" onClick={this.goToLogin}>LOGIN</button>
-            </div>
-            
-            <form>
-                <h4>Personal Details</h4>
-                <div className="form-group">
-                    <label>First Name:</label>
-                    <input type="text" placeholder="Enter First name" name="firstName" className="form-control" value={this.state.firstName} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>Last Name:</label>
-                    <input type="text" placeholder="Enter Last name" name="lastName" className="form-control" value={this.state.lastName} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>Email:</label>
-                    <input type="email" name="email" className="form-control" value={this.state.email} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>Aadhar Number:</label>
-                    <input type="number" placeholder="Enter 12 digit aadhar number" name="aadharNumber" className="form-control" value={this.state.aadharNumber} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>Contact Number:</label>
-                    <input type="number" name="contactNumber" className="form-control" value={this.state.contactNumber} onChange={this.changeHandler} />
-                </div>
-                <hr />
-
-                <h4>Address Info</h4>
-                <div className="form-group">
-                    <label>Door Number:</label>
-                    <input type="text" name="doorNumber" className="form-control" value={this.state.doorNumber} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>Street Name:</label>
-                    <input type="text" name="streetName" className="form-control" value={this.state.streetName} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>Building Name:</label>
-                    <input type="text" placeholder="Optional" name="buildingName" className="form-control" value={this.state.buildingName} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>Locality:</label>
-                    <input type="text" name="locality" className="form-control" value={this.state.locality} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>City:</label>
-                    <input type="text" name="city" className="form-control" value={this.state.city} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>State:</label>
-                    <input type="text" name="state" className="form-control" value={this.state.state} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>Country:</label>
-                    <input type="text" name="country" className="form-control" value={this.state.country} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>Zip:</label>
-                    <input type="number" name="zip" className="form-control" value={this.state.zip} onChange={this.changeHandler} />
-                </div>
-
-                <hr />
-
-                <h4>Bank Details</h4>
-
-                <div className="form-group">
-                    <label>Account Number:</label>
-                    <input type="text" placeholder="Enter 14-digit account number" name="accountNumber" className="form-control" value={this.state.accountNumber} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>Account Holder Name:</label>
-                    <input type="text" name="accountHolderName" className="form-control" value={this.state.accountHolderName} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>Bank Name:</label>
-                    <input type="text" name="bankName" className="form-control" value={this.state.bankName} onChange={this.changeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>Branch Name:</label>
-                    <input type="text" name="branchName" className="form-control" value={this.state.branchName} onChange={this.changeHandler} />
-                </div>
-
-                <hr />
-
-                <div className="form-group">
-                    <label>Password:</label>
-                    <input type="password" placeholder="password" name="password" className="form-control" value={this.state.password} onChange={this.changeHandler} />
-                </div>
-
-
-                <div className="form-group">
-                    <label htmlFor="type">Select Account Type:</label>
-                    <select className="form-control" id="type" name="userType" onChange={this.changeHandler}>
-                        <option value="SELLER">SELLER</option>
-                        <option value="BUYER">BUYER</option>
-                    </select>
-                </div>
-
-                <button className="btn btn-success" type= "submit" onClick={() => this.registerUser()}>REGISTER</button>
-            </form>
-        </div></div>
-            
-            
-        )
-    }
-}
-
-export default RegisterUser
- */
-
-
-
-
-
 import React, { Component } from 'react'
 import UserService from '../service/UserService';
 import Footer from './Footer';
@@ -215,76 +8,222 @@ class RegisterUser extends Component {
         super(props)
 
         this.state = {
-            firstName: '',
-            lastName: '',
-            email: '',
-            aadharNumber: '',
-            contactNumber: '',
-            doorNumber: '',
-            buildingName: '',
-            streetName: '',
-            locality: '',
-            city: '',
-            state: '',
-            country: '',
-            zip: '',
-            accountNumber: '',
-            accountHolderName: '',
-            bankName: '',
-            branchName: '',
-            password: '',
-            userType: '',
-        }
-
-        this.registerUser = this.registerUser.bind(this)
-    }
-
-    changeHandler = (event) => {
-        event.preventDefault();
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
-
-
-    registerUser = (event) => {
-        let user = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            aadharNumber: this.state.aadharNumber,
-            contactNumber: this.state.contactNumber,
-            password: this.state.password,
-            userType: this.state.userType,
-            address: {
-                doorNumber: this.state.doorNumber,
-                buildingName: this.state.buildingName,
-                streetName: this.state.streetName,
-                locality: this.state.locality,
-                city: this.state.city,
-                state: this.state.state,
-                country: this.state.country,
-                zip: this.state.zip,
+            user: {
+                firstName: '',
+                lastName: '',
+                email: '',
+                aadharNumber: '',
+                contactNumber: '',
+                doorNumber: '',
+                buildingName: '',
+                streetName: '',
+                locality: '',
+                city: '',
+                state: '',
+                country: '',
+                zip: '',
+                accountNumber: '',
+                accountHolderName: '',
+                bankName: '',
+                branchName: '',
+                password: '',
+                userType: '',
             },
-            bankDetails: {
-                accountNumber: this.state.accountNumber,
-                accountHolderName: this.state.accountHolderName,
-                bankName: this.state.bankName,
-                branchName: this.state.branchName,
+            errors: {
+                firstName: '',
+                lastName: '',
+                email: '',
+                aadharNumber: '',
+                contactNumber: '',
+                doorNumber: '',
+                buildingName: '',
+                streetName: '',
+                locality: '',
+                city: '',
+                state: '',
+                country: '',
+                zip: '',
+                accountNumber: '',
+                accountHolderName: '',
+                bankName: '',
+                branchName: '',
+                password: '',
+                userType: '',
             }
         }
-        console.log(user.userType)
-        UserService.createAccount(user)
-            .then(response => {
-                console.log(response)
-                window.alert("Account created successfully with UserID " + response.data.userId);
-                window.location.reload()
-            })
-            .catch(error => {
-                console.log(error.response)
-                window.alert(error.response.data.errorCode + " " + error.response.data.errorMessage)
-            })
+
     }
+
+    handleValidation() {
+        let user = this.state.user;
+        let errors = {};
+        let formIsValid = true;
+
+
+
+        if (!user["firstName"].match(/^[a-zA-Z\s]+$/)) {
+            formIsValid = false;
+            errors["firstName"] = "First Name should contain only letters";
+        }
+        else {
+            errors["firstName"] = "";
+        }
+
+        if (!user["lastName"].match(/^[a-zA-Z\s]*$/)) {
+            formIsValid = false;
+            errors["lastName"] = "Last Name should contain only letters";
+        }
+        else {
+            errors["lastName"] = "";
+        }
+
+        if (!user["aadharNumber"].match(/^[0-9]{12}$/)) {
+            formIsValid = false;
+            errors["aadharNumber"] = "Aadhar Number should contain only 12 digits";
+        }
+        else {
+            errors["aadharNumber"] = "";
+        }
+
+
+        if (!user["contactNumber"].match(/^[0-9]{10}$/)) {
+            formIsValid = false;
+            errors["contactNumber"] = "Contact Number should contain only  10 digits";
+        }
+        else {
+            errors["contactNumber"] = "";
+        }
+        if (!user["buildingName"].match(/^[a-zA-Z\s]*$/)) {
+            formIsValid = false;
+            errors["buildingName"] = "Building Name should contain only letters";
+        }
+        else {
+            errors["buildingName"] = "";
+        }
+
+        if (!user["streetName"].match(/^[a-zA-Z\s]+$/)) {
+            formIsValid = false;
+            errors["streetName"] = "Street Name should contain only letters";
+        }
+        else {
+            errors["streetName"] = "";
+        }
+
+        if (!user["locality"].match(/^[a-zA-Z\s]+$/)) {
+            formIsValid = false;
+            errors["locality"] = "Locality should contain only letters";
+        }
+        else {
+            errors["locality"] = "";
+        }
+
+        if (!user["city"].match(/^[a-zA-Z\s]+$/)) {
+            formIsValid = false;
+            errors["city"] = "City should contain only letters";
+        }
+        else {
+            errors["city"] = "";
+        }
+
+        if (!user["zip"].match(/^[0-9]{6}$/)) {
+            formIsValid = false;
+            errors["zip"] = "Zip should contain only 6 digits";
+        }
+        else {
+            errors["zip"] = "";
+        }
+
+        if (!user["accountNumber"].match(/^[0-9]{14}$/)) {
+            formIsValid = false;
+            errors["accountNumber"] = "Account Number should contain only 14 digits";
+        }
+        else {
+            errors["accountNumber"] = "";
+        }
+
+        if (!user["accountHolderName"].match(/^[a-zA-Z\s]+$/)) {
+            formIsValid = false;
+            errors["accountHolderName"] = "Account Holder Name should contain only letters";
+        }
+        else {
+            errors["accountHolderName"] = "";
+        }
+
+        if (!user["bankName"].match(/^[a-zA-Z\s]+$/)) {
+            formIsValid = false;
+            errors["bankName"] = "Bank Name should contain only letters";
+        }
+        else {
+            errors["bankName"] = "";
+        }
+
+        if (!user["branchName"].match(/^[a-zA-Z\s]+$/)) {
+            formIsValid = false;
+            errors["branchName"] = "Branch Name should contain only letters";
+        }
+        else {
+            errors["branchName"] = "";
+        }
+        this.setState({ errors: errors });
+        return formIsValid;
+
+
+    }
+
+    changeHandler(field, event) {
+        let user = this.state.user;
+        user[field] = event.target.value;
+        this.setState({ user });
+    }
+
+
+    registerUser(event) {
+        event.preventDefault();
+        let user = {
+            firstName: this.state.user.firstName,
+            lastName: this.state.user.lastName,
+            email: this.state.user.email,
+            aadharNumber: this.state.user.aadharNumber,
+            contactNumber: this.state.user.contactNumber,
+            password: this.state.user.password,
+            userType: this.state.user.userType,
+            address: {
+                doorNumber: this.state.user.doorNumber,
+                buildingName: this.state.user.buildingName,
+                streetName: this.state.user.streetName,
+                locality: this.state.user.locality,
+                city: this.state.user.city,
+                state: this.state.user.state,
+                country: this.state.user.country,
+                zip: this.state.user.zip,
+            },
+            bankDetails: {
+                accountNumber: this.state.user.accountNumber,
+                accountHolderName: this.state.user.accountHolderName,
+                bankName: this.state.user.bankName,
+                branchName: this.state.user.branchName,
+            }
+        }
+
+        if (this.handleValidation()) {
+            console.log(user)
+            UserService.createAccount(user)
+                .then(response => {
+                    console.log(response)
+                    window.alert("Account created successfully with UserID " + response.data.userId);
+                    window.location.reload()
+                })
+                .catch(error => {
+                    console.log(error.response)
+                    window.alert(error.response.data.errorCode + " " + error.response.data.errorMessage)
+                })
+        } else {
+            console.log(this.state.errors)
+            alert("Form has errors. Please enter the correct information.");
+
+        }
+    }
+
 
     goToLogin = () => {
         this.props.history.push('/');
@@ -294,66 +233,76 @@ class RegisterUser extends Component {
         return (
             <div className="container my-5">
                 <Header />
-                <br/><br/><br/><br/>
+                <br /><br /><br /><br />
                 <div class="row">
-                <h2 className="text-center col-10">User Registration</h2>
-                <button className="btn btn-info col-2" style={{marginRight:'-50px'}}onClick={this.goToLogin}>LOGIN</button>
+                    <h2 className="text-center col-10">User Registration</h2>
+                    <button className="btn btn-info col-2" style={{ marginRight: '-50px' }} onClick={this.goToLogin}>LOGIN</button>
                 </div>
                 <div class="card">
                     <div class="card-body">
                         <div class="col-md-10">
 
-                            <form>
+                            <form onSubmit={this.registerUser.bind(this)}>
                                 <div className="row">
                                     <h4>Personal Details</h4>
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>First Name:</label>
-                                    <input type="text" placeholder="Enter First name" name="firstName" className="form-control" value={this.state.firstName} onChange={this.changeHandler} required />
+                                    <input type="text" name="firstName" className="form-control" value={this.state.user.firstName} onChange={this.changeHandler.bind(this, "firstName")} required />
+                                    <span className="errorMessage">{this.state.errors["firstName"]}</span>
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>Last Name:</label>
-                                    <input type="text" placeholder="Enter Last name" name="lastName" className="form-control" value={this.state.lastName} onChange={this.changeHandler} />
+                                    <input type="text" name="lastName" className="form-control" value={this.state.user.lastName} onChange={this.changeHandler.bind(this, "lastName")} />
+                                    <span className="error">{this.state.errors["lastName"]}</span>
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>Email:</label>
-                                    <input type="email" pattern="/[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/" name="email" className="form-control" value={this.state.email} onChange={this.changeHandler} required />
+                                    <input type="email" pattern="/[a-zA-Z0-9\.]+@[a-zA-Z0-9]+\.[A-Za-z]{3}+$/" name="email" className="form-control" value={this.state.user.email} onChange={this.changeHandler.bind(this, "email")} required />
+                                    <span className="error">{this.state.errors["email"]}</span>
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>Aadhar Number:</label>
-                                    <input type="text" placeholder="Enter 12 digit aadhar number" minLength={12} maxLength={12} name="aadharNumber" className="form-control" value={this.state.aadharNumber} onChange={this.changeHandler} required />
+                                    <input type="text" placeholder="Enter 12 digit aadhar number" name="aadharNumber" className="form-control" value={this.state.user.aadharNumber} onChange={this.changeHandler.bind(this, "aadharNumber")} required />
+                                    <span className="error">{this.state.errors["aadharNumber"]}</span>
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>Contact Number:</label>
-                                    <input type="text" name="contactNumber" minLength={10} maxLength={10} className="form-control" value={this.state.contactNumber} onChange={this.changeHandler} required />
+                                    <input type="text" name="contactNumber" placeholder="Enter 10 digit contact number" className="form-control" value={this.state.user.contactNumber} onChange={this.changeHandler.bind(this, "contactNumber")} required />
+                                    <span className="error">{this.state.errors["contactNumber"]}</span>
                                 </div>
                                 <hr />
 
                                 <h4>Address Info</h4>
                                 <div className="form-group col-md-8">
                                     <label>Door Number:</label>
-                                    <input type="text" name="doorNumber" className="form-control" value={this.state.doorNumber} onChange={this.changeHandler} required />
+                                    <input type="text" name="doorNumber" className="form-control" value={this.state.user.doorNumber} onChange={this.changeHandler.bind(this, "doorNumber")} required />
+                                    <span className="error">{this.state.errors["doorNumber"]}</span>
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>Street Name:</label>
-                                    <input type="text" name="streetName" className="form-control" value={this.state.streetName} onChange={this.changeHandler} required />
+                                    <input type="text" name="streetName" className="form-control" value={this.state.user.streetName} onChange={this.changeHandler.bind(this, "streetName")} required />
+                                    <span className="error">{this.state.errors["streetName"]}</span>
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>Building Name:</label>
-                                    <input type="text" placeholder="Optional" name="buildingName" className="form-control" value={this.state.buildingName} onChange={this.changeHandler} />
+                                    <input type="text" placeholder="Optional" name="buildingName" className="form-control" value={this.state.user.buildingName} onChange={this.changeHandler.bind(this, "buildingName")} />
+                                    <span className="error">{this.state.errors["buildingName"]}</span>
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>Locality:</label>
-                                    <input type="text" name="locality" className="form-control" value={this.state.locality} onChange={this.changeHandler} required />
+                                    <input type="text" name="locality" className="form-control" value={this.state.user.locality} onChange={this.changeHandler.bind(this, "locality")} required />
+                                    <span className="error">{this.state.errors["locality"]}</span>
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>City:</label>
-                                    <input type="text" name="city" className="form-control" value={this.state.city} onChange={this.changeHandler} required />
+                                    <input type="text" name="city" className="form-control" value={this.state.user.city} onChange={this.changeHandler.bind(this, "city")} required />
+                                    <span className="error">{this.state.errors["city"]}</span>
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>State:</label>
-                                    {/* <input type="text" name="state" className="form-control"  /> */}
-                                    <select name="state" class="form-control" value={this.state.state} onChange={this.changeHandler} required>
+
+                                    <select name="state" class="form-control" value={this.state.user.state} onChange={this.changeHandler.bind(this, "state")} required>
                                         <option value="0">-Select-</option>
                                         <option value="1">Andaman and Nicobar (UT)</option>
                                         <option value="2">Andhra Pradesh</option>
@@ -396,8 +345,7 @@ class RegisterUser extends Component {
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>Country:</label>
-                                    {/* <input type="text" name="country" className="form-control"  /> */}
-                                    <select name="country" class="form-control" value={this.state.country} onChange={this.changeHandler} required>
+                                    <select name="country" class="form-control" value={this.state.user.country} onChange={this.changeHandler.bind(this, "country")} required>
                                         <option value="0">-Select-</option>
                                         <option value="1">Afghanistan</option>
                                         <option value="2">Albania</option>
@@ -563,7 +511,8 @@ class RegisterUser extends Component {
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>Zip:</label>
-                                    <input type="text" name="zip" className="form-control" minLength={6} maxLength={6} value={this.state.zip} onChange={this.changeHandler} required />
+                                    <input type="text" placeholder="Enter 6-digit postal code" name="zip" className="form-control" value={this.state.user.zip} onChange={this.changeHandler.bind(this, "zip")} required />
+                                    <span className="error">{this.state.errors["zip"]}</span>
                                 </div>
 
                                 <hr />
@@ -572,59 +521,57 @@ class RegisterUser extends Component {
 
                                 <div className="form-group col-md-8">
                                     <label>Account Number:</label>
-                                    <input type="text" placeholder="Enter 14-digit account number" name="accountNumber" minLength={14} maxLength={14} className="form-control" value={this.state.accountNumber} onChange={this.changeHandler} required />
+                                    <input type="text" placeholder="Enter 14-digit account number" name="accountNumber" className="form-control" value={this.state.user.accountNumber} onChange={this.changeHandler.bind(this, "accountNumber")} required />
+                                    <span className="error">{this.state.errors["accountNumber"]}</span>
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>Account Holder Name:</label>
-                                    <input type="text" name="accountHolderName" className="form-control" value={this.state.accountHolderName} onChange={this.changeHandler} required />
+                                    <input type="text" name="accountHolderName" className="form-control" value={this.state.user.accountHolderName} onChange={this.changeHandler.bind(this, "accountHolderName")} required />
+                                    <span className="error">{this.state.errors["accountHolderName"]}</span>
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>Bank Name:</label>
-                                    <input type="text" name="bankName" className="form-control" value={this.state.bankName} onChange={this.changeHandler} required />
+                                    <input type="text" name="bankName" className="form-control" value={this.state.user.bankName} onChange={this.changeHandler.bind(this, "bankName")} required />
+                                    <span className="error">{this.state.errors["bankName"]}</span>
                                 </div>
                                 <div className="form-group col-md-8">
                                     <label>Branch Name:</label>
-                                    <input type="text" name="branchName" className="form-control" value={this.state.branchName} onChange={this.changeHandler} required />
+                                    <input type="text" name="branchName" className="form-control" value={this.state.user.branchName} onChange={this.changeHandler.bind(this, "branchName")} required />
+                                    <span className="error">{this.state.errors["branchName"]}</span>
                                 </div>
 
                                 <hr />
 
                                 <div className="form-group col-md-8">
                                     <label>Password:</label>
-                                    <input type="password" placeholder="password" name="password" className="form-control" value={this.state.password} onChange={this.changeHandler} required />
+                                    <input type="password" name="password" className="form-control" value={this.state.user.password} onChange={this.changeHandler.bind(this, "password")} required />
                                 </div>
 
 
-                                {/* <div className="form-group col-md-8">
-                                    <label htmlFor="type">Select Account Type:</label>
-                                    <select className="form-control" id="type" name="userType" onChange={this.changeHandler} autoFocus required>
-                                        <option value="SELLER">SELLER</option>
-                                        <option value="BUYER">BUYER</option>
-                                    </select>
-                                </div> */}
-                                <h6>Select Account Type:</h6>
-                                <div className="form-check col-md-8">
-                                    <input className="form-check-input" type="radio" name="userType" value="SELLER" onChange={this.changeHandler} />
+
+                                <label>User Type:</label>
+                                <div className="form-check">
+                                    <input className="form-check-input" type="radio" name="userType" value="SELLER" onChange={this.changeHandler.bind(this, "userType")} />
                                     <label className="form-check-label">
                                         SELLER
                             </label>
                                 </div>
-                                <br/>
-                                <div className="form-check col-md-8">
-                                    <input className="form-check-input" type="radio" name="userType" value="BUYER" onChange={this.changeHandler} />
+                                <div className="form-check">
+                                    <input className="form-check-input" type="radio" name="userType" value="BUYER" onChange={this.changeHandler.bind(this, "userType")} />
                                     <label className="form-check-label">
                                         BUYER
                             </label>
                                 </div>
-                                <br/>
+                                <br />
                                 <div class="col-md-6">
-                                    <button className="btn btn-success" type="submit" onClick={() => this.registerUser()}>REGISTER</button>
+                                    <button className="btn btn-success" type="submit">REGISTER</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                <Footer/>
+                <br/> <br/>
+                <Footer />
             </div>
         )
     }

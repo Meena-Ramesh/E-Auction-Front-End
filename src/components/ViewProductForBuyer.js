@@ -65,8 +65,8 @@ class ViewProductForBuyer extends Component {
                             <h6>Auction Details</h6>
                             <hr/>
                             <pre>Auction ID             : {auction.auctionId}<br/>
-                                 Base Price             : {auction.basePrice}<br/>
-                                 Maximum Bidding Price  : {auction.maxBidPrice} <br/>
+                                 Base Price             : <i className="fa fa-inr"></i> {auction.basePrice}<br/>
+                                 Maximum Bidding Price  : <i className="fa fa-inr"></i> {auction.maxBidPrice} <br/>
                                  Auction Winner         : {auction.bidWinner}<br/>
                                  Start Date             : {auction.startDate.slice(0,10)}<br/>
                                  End Date               : {auction.endDate.slice(0,10)}
@@ -79,6 +79,7 @@ class ViewProductForBuyer extends Component {
                     </div>
                     </div>
                 </div>
+                <br/> <br/>
                 <Footer/>
             </div>
         )

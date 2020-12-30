@@ -119,7 +119,7 @@ class ListMyProducts extends Component {
                     </div>
 
                 </div>
-                <br />
+                <br/> <br/>
                 <Footer/>
             </div>
         )

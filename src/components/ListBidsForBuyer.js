@@ -138,9 +138,9 @@ class ListBidsForBuyer extends Component {
                                      this.state.bids.map( bid =>
                                         <tr key={bid.bidId}>
                                             <td>{bid.bidId}</td>
-                                            <td>{bid.bidPrice}</td>
+                                            <td><i className="fa fa-inr"></i> {bid.bidPrice}</td>
                                             <td>{bid.auction.auctionId}</td>
-                                            <td>{bid.auction.maxBidPrice}</td>
+                                            <td><i className="fa fa-inr"></i> {bid.auction.maxBidPrice}</td>
                                             <td>{bid.buyer.userId}</td>
                                             <td>{bid.buyer.firstName}</td>
                                         </tr> ) 
@@ -151,6 +151,7 @@ class ListBidsForBuyer extends Component {
                     </div>
                     </div>
                 </div>
+                <br/> <br/>
                 <Footer/>
             </div>
         )

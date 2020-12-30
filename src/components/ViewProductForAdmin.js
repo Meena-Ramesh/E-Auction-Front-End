@@ -90,6 +90,7 @@ class ViewProductForAdmin extends Component {
                         <button onClick={() => this.reviewProduct(product.productId, "reject")} className="btn btn-danger" style={{ marginLeft: "10px" }}>REJECT</button>
                     </div>
                 </div>
+                <br/> <br/>
                 <Footer/>
             </div>
         )

@@ -108,7 +108,7 @@ class Home extends Component {
                         <h3 className="text-center">Welcome!!!</h3>
                         <h4 className="text-center text-muted">Login to continue</h4>
                         <div className="card-body">
-                            <form>
+                            <form onSubmit={this.loginUser}>
                                 <div className="form-group">
                                     <input type="text" placeholder="User ID" className="form-control" name="userId" value={userId} pattern="[0-9]{1,}" onChange={this.changeHandler} required />
                                 </div>
@@ -119,28 +119,29 @@ class Home extends Component {
                                 <div className="form-check">
                                     <input className="form-check-input" type="radio" name="userType" value="SELLER" onChange={this.changeHandler} />
                                     <label className="form-check-label">
-                                        SELLER
+                                        Seller
                             </label>
                                 </div>
                                 <div className="form-check">
                                     <input className="form-check-input" type="radio" name="userType" value="BUYER" onChange={this.changeHandler} />
                                     <label className="form-check-label">
-                                        BUYER
+                                        Buyer
                             </label>
                                 </div>
                                 <div className="form-check">
                                     <input className="form-check-input" type="radio" name="userType" value="ADMIN" onChange={this.changeHandler} />
                                     <label className="form-check-label">
-                                        ADMIN
+                                        Admin
                             </label>
                                 </div>
                                 <br />
-                                <button className="btn btn-info" type="submit" onClick={this.loginUser}> LOGIN</button>
+                                <button className="btn btn-info" type="submit"> LOGIN</button>
                                 <button style={{ marginLeft: "10px" }} onClick={() => this.registerUser()} className="btn btn-dark">REGISTER </button>
                             </form>
                         </div>
                     </div>
                 </div>
+                <br/> <br/>
                 <Footer/>
             </div>
         )

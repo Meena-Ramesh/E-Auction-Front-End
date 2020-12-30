@@ -80,6 +80,7 @@ class ViewProfile extends Component {
                         </div>
                     </div>
                 </div>
+                <br/> <br/>
                 <Footer/>
             </div>
         )

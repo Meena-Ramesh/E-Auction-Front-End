@@ -190,6 +190,7 @@ class ListAllCategory extends Component {
                     </div>
                     </div>
                 </div>
+                <br/> <br/>
                 <Footer/>
             </div>
         )
